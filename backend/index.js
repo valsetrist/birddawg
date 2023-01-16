@@ -28,20 +28,28 @@ app.get('/api/drones', async (req, res) => {
 // updateDrones loops through current drones, updates & adds.
 // was torn between having the client ping the server every ~2s, or using sse to send updates when necessary
 async function updateDrones() {
-  const data = await getDrones();
+  try {
+    const data = await getDrones();
   
-  data.forEach((d) => {
-    addDrone(d);
-  })
-  console.log("updating!!")  
-  removeOld();
+    data.forEach((d) => {
+      addDrone(d);
+    })
+    console.log(drones)  
+    removeOld();
+   } catch (e) {
+     console.log('error updating: ', e)
+   }
 }
 
 function addDrone(drone) {
   const exists = drones.findIndex((d) => d.serialNumber == drone.serialNumber)
   if (exists != -1) {
     // already exists in array 
-    drones[exists] = drone;
+    const ndOld = nestDistance(drones[exists].positionX, drones[exists].positionY)
+    const ndNew = nestDistance(drone.positionX, drone.positionY)
+    if (ndNew < ndOld)
+      drones[exists] = drone;
+    
   } else {
     drones.push(drone);
   }
@@ -81,13 +89,18 @@ async function getDrones() {
 	positionY: parseFloat(d.positionY._text),
 	positionX: parseFloat(d.positionX._text),
         altitude: parseFloat(d.altitude._text),
-	dateSeen: new Date()
+	dateSeen: new Date(),
+	violation: false,
       }
-      
+     
+
+      // assignment was to list all the past violators, but I thought it would be cool to see all drones
+      // so we get the pilot info only if it's a ndz violation
       const nd = nestDistance(drone.positionX, drone.positionY)
-      if (nd < 10000) {
+      if (nd < 100000) {
         const pilot = await getPilot(drone.serialNumber)
 	drone.pilot = pilot;
+	drone.violation = true;
       }
      
       drone.nestDistance = nd;
@@ -108,6 +121,7 @@ async function getPilot(id) {
     if (!res) return;
     
     return {
+      pilotId: res.data.pilotId,
       name: res.data.firstName + " " + res.data.lastName,
       phone: res.data.phoneNumber,
       email: res.data.email
