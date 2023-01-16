@@ -20,10 +20,9 @@ let drones = [];
 // updates will be done every 2s, and changes will be broadcast to client via sse
 
 app.get('/api/drones', async (req, res) => {
-  await updateDrones();
+  // await updateDrones(); done every ~2seconds anyway? 
   
-  console.log('final dronelist: ', drones);
-  res.send(200)
+  res.send(JSON.stringify(drones))
 })
 
 // updateDrones loops through current drones, updates & adds.
@@ -34,7 +33,7 @@ async function updateDrones() {
   data.forEach((d) => {
     addDrone(d);
   })
-  
+  console.log("updating!!")  
   removeOld();
 }
 
@@ -86,7 +85,7 @@ async function getDrones() {
       }
       
       const nd = nestDistance(drone.positionX, drone.positionY)
-      if (nd < 100) {
+      if (nd < 10000) {
         const pilot = await getPilot(drone.serialNumber)
 	drone.pilot = pilot;
       }
@@ -125,6 +124,7 @@ async function getPilot(id) {
   }
 }
 
+setInterval(updateDrones, 1950)
 
 app.listen(5000, () => {
   console.log('bird server running on port 5000 for now')
