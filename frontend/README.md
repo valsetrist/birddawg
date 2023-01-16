@@ -1,71 +1,70 @@
-# Very Fast React Boilerplate
+# Getting Started with Create React App
 
-<p align="center">
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![header](https://capsule-render.vercel.app/api?type=waving&color=61DAFB&height=300&section=header&text=Very%20Fast%20React%20Boilerplate&fontSize=60&animation=fadeIn&fontAlignY=38&descAlignY=51&descAlign=62&fontColor=F5F8FA)
+## Available Scripts
 
-</p>
+In the project directory, you can run:
 
-[![Github Downloads](https://img.shields.io/npm/dt/react-vite-ts-boilerplate)](https://www.npmjs.com/package/react-vite-ts-boilerplate)
-[![npm version](https://badge.fury.io/js/react-vite-ts-boilerplate.svg)](https://www.npmjs.com/package/react-vite-ts-boilerplate)
+### `npm start`
 
-## Getting started
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-1. Gets the git project. (Auto run installation)
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-```
-  npx react-vite-ts-boilerplate my-app
-```
+### `npm test`
 
-2. Start the dev server. And open http://localhost:3000 in your browser.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-```
-  yarn dev
-```
+### `npm run build`
 
-3. Build your product.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-```
-  yarn prod
-```
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-## Dependencies
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-- React
-- Vite
-- Typescript 
-- eslint
-- Prettier
+### `npm run eject`
 
-## Performance
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-- fast dev server
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-```bash
-$ yarn dev
-yarn run v1.22.17
-$ vite
-                                                                                                                                                                                           16:58:10
-  vite v2.8.6 dev server running at:
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-  > Local: http://localhost:3000/                                                                                                                                                          16:58:10
-  > Network: use --host to expose                                                                                                                                                          16:58:10
-                                                                                                                                                                                           16:58:10
-  ready in 776ms.
-```
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-- fast build speed
+## Learn More
 
-```bash
-$ yarn prod               
-yarn run v1.22.17
-$ vite build
-vite v2.8.6 building for production...                                                                                                                                                                                                                         21:57:44
-✓ 37 modules transformed.                                                                                                                                                                                                                                      21:57:45
-dist/public/index.html           0.55 KiB                                                                                                                                                                                                                      21:57:45
-dist/assets/index.f377a083.js    2.09 KiB / gzip: 1.13 KiB                                                                                                                                                                                                     21:57:45
-dist/assets/vendor.5ad169fc.js   136.42 KiB / gzip: 44.42 KiB                                                                                                                                                                                                  21:57:45
-✨  Done in 2.22s.
-```
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-- Type checking by [vite-plugin-checker](https://www.npmjs.com/package/vite-plugin-checker)
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
