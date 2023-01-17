@@ -9,7 +9,7 @@ const App = () => {
   const [closest, setClosest] = useState({})
 
   const getDrones = async () => {
-    const res = await axios.get('http://localhost:5000/api/drones')
+    const res = await axios.get('/api/drones')
 
     const closest = res.data?.reduce((prev, curr) => {
       return (prev.nestDistance < curr.nestDistance) ? prev : curr;

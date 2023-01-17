@@ -15,4 +15,4 @@ yarn
 yarn start
 ```
 
-
+![Screenshot](https://i.imgur.com/sG6vJ9K.png)
