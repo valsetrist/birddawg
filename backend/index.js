@@ -1,5 +1,5 @@
 const express = require('express');
-const sse = require('express-sse');
+// const sse = require('express-sse');
 const axios = require("axios");
 const cors= require('cors');
 var parser = require('xml-js');
@@ -16,8 +16,8 @@ let drones = [];
 //   -x,y,z
 //   -pilot (only present if drone violates non-fly-zone)
 //   -dateSeen (time drone was last spotted)
+//   -violation (boolean)
 
-// updates will be done every 2s, and changes will be broadcast to client via sse
 
 app.get('/api/drones', async (req, res) => {
   // await updateDrones(); done every ~2seconds anyway? 
@@ -34,7 +34,6 @@ async function updateDrones() {
     data.forEach((d) => {
       addDrone(d);
     })
-    console.log(drones)  
     removeOld();
    } catch (e) {
      console.log('error updating: ', e)
@@ -42,14 +41,21 @@ async function updateDrones() {
 }
 
 function addDrone(drone) {
+  // I wanted to see the other drones flying around too, 
+  // so if a drone is not in the ndz, I update it's position
+  // if a drone is violating, and moves out, I keep it's violating position
+
   const exists = drones.findIndex((d) => d.serialNumber == drone.serialNumber)
   if (exists != -1) {
-    // already exists in array 
+    // exists
     const ndOld = nestDistance(drones[exists].positionX, drones[exists].positionY)
     const ndNew = nestDistance(drone.positionX, drone.positionY)
-    if (ndNew < ndOld)
+    if (ndNew < ndOld) {
       drones[exists] = drone;
-    
+    } else if (drones[exists].violation == false && drone.violation == false) {
+      drones[exists] = drone;
+    }
+     
   } else {
     drones.push(drone);
   }
@@ -94,8 +100,7 @@ async function getDrones() {
       }
      
 
-      // assignment was to list all the past violators, but I thought it would be cool to see all drones
-      // so we get the pilot info only if it's a ndz violation
+      // we get the pilot info only if it's a ndz violation
       const nd = nestDistance(drone.positionX, drone.positionY)
       if (nd < 100000) {
         const pilot = await getPilot(drone.serialNumber)
